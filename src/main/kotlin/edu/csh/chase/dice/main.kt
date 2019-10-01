@@ -40,8 +40,8 @@ fun main() {
                         event.reply("What even is a d1?")
                         return
                     }
-                    dieValue > 50 -> {
-                        event.reply("I'm not rolling higher than a d50")
+                    dieValue > 10_000 -> {
+                        event.reply("I'm not rolling higher than a d10,000")
                         return
                     }
                     else -> Unit
