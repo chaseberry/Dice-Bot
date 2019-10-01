@@ -23,22 +23,25 @@ fun main() {
 
                 val dieValue = it.groupValues.getOrNull(2)?.toIntOrNull() ?: 6
 
-                if (rolls > 100) {
-                    event.channel.sendMessage("You can't roll more than 100").queue()
-                    return
-                }
-
                 when {
+                    rolls == 0 -> {
+                        event.reply("You get nothing. You lose. Good day sir.")
+                        return
+                    }
+                    rolls > 100 -> {
+                        event.reply("You can't roll more than 100")
+                        return
+                    }
                     dieValue == 0 -> {
-                        event.channel.sendMessage("d0? Heck off.").queue()
+                        event.reply("d0? Heck off.")
                         return
                     }
                     dieValue == 1 -> {
-                        event.channel.sendMessage("What even is a d1?").queue()
+                        event.reply("What even is a d1?")
                         return
                     }
                     dieValue > 50 -> {
-                        event.channel.sendMessage("I'm not rolling higher than a d50").queue()
+                        event.reply("I'm not rolling higher than a d50")
                         return
                     }
                     else -> Unit
@@ -51,9 +54,9 @@ fun main() {
                 }
 
                 if (rolls == 1) {
-                    event.channel.sendMessage("Rolled ${rs.first()}").queue()
+                    event.reply("Rolled ${rs.first()}")
                 } else {
-                    event.channel.sendMessage("Rolled ${rs.joinToString(",", "[", "]")}=${rs.sum()}").queue()
+                    event.reply("Rolled ${rs.joinToString(",", "[", "]")}=${rs.sum()}")
                 }
 
             }
@@ -61,3 +64,5 @@ fun main() {
     })
 
 }
+
+fun MessageReceivedEvent.reply(msg: String) = this.channel.sendMessage(msg).queue()
