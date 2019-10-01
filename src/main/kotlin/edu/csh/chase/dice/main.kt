@@ -10,7 +10,7 @@ fun main() {
 
     jda.awaitReady()
 
-    val dieRegex = Regex("^roll (\\d+)?d(\\d+)\$")
+    val dieRegex = Regex("^roll (\\d+)?d(\\d+)\$", RegexOption.IGNORE_CASE)
 
     jda.addEventListener(object : ListenerAdapter() {
 
